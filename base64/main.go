@@ -47,5 +47,19 @@ func main(){
 		x := (uint32(b1) << 16) | (uint32(b2) << 8) | uint32(b3)
 
 		fmt.Printf("Group %d combined 24-bit: %024b\n", grp+1, x)
-	} 
+	
+	// STEP 3
+	var sixBitGrps []uint32
+    fmt.Printf("Group %d 6-bit chunks: ", grp+1)
+
+	chunk1 := (x >> 18) & 0x3F // First 6 bits (bits 23-18)
+	chunk2 := (x >> 12) & 0x3F // Second 6 bits (bits 17-12)
+	chunk3 := (x >> 6) & 0x3F  // Third 6 bits (bits 11-6)
+	chunk4 := x & 0x3F         // Last 6 bits (bits 5-0)
+
+	sixBitGrps = append(sixBitGrps, chunk1, chunk2, chunk3, chunk4)
+
+		fmt.Printf("%06b %06b %06b %06b\n", chunk1, chunk2, chunk3, chunk4)
+		fmt.Printf("Decimal values: %d %d %d %d\n", chunk1, chunk2, chunk3, chunk4)
+	}
 }
