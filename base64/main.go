@@ -26,7 +26,7 @@ func main() {
 		}
 	}
 
-	// STEP 2
+	// STEP 2 
 	bytesLen := len(bytes)
 	fmt.Printf("\nTotal bytes: %d\n", bytesLen)
 
