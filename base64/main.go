@@ -1,14 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
 func main() {
-	var w string
 	fmt.Print("Give a word: ")
-	fmt.Scan(&w)
-	var Result string
+	reader := bufio.NewReader(os.Stdin)
+	w, _ := reader.ReadString('\n')       // Read until Enter
+	w = strings.TrimRight(w, "\r\n")       // Remove trailing newline
 
-	// Base64 index table (moved outside the loop)
+	var Result string
 	base64Chars := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
 	// STEP 1
@@ -26,13 +31,16 @@ func main() {
 		}
 	}
 
-	// STEP 2 
+	// STEP 2
 	bytesLen := len(bytes)
+	if bytesLen == 0 {
+		fmt.Println("No input given!")
+		return
+	}
 	fmt.Printf("\nTotal bytes: %d\n", bytesLen)
 
 	for grp := 0; grp < (bytesLen+2)/3; grp++ {
 		start := grp * 3
-
 		if start >= bytesLen {
 			break
 		}
@@ -50,7 +58,6 @@ func main() {
 
 		// STEP 3
 		fmt.Printf("Group %d 6-bit chunks: ", grp+1)
-
 		chunk1 := (x >> 18) & 0x3F
 		chunk2 := (x >> 12) & 0x3F
 		chunk3 := (x >> 6) & 0x3F
@@ -78,5 +85,5 @@ func main() {
 	}
 
 	fmt.Print("\n===[{ FINAL RESULT }]===\n\n")
-	fmt.Printf("%s ===> %s\n", w, Result)
+	fmt.Printf("%q ===> %s\n", w, Result)  
 }
