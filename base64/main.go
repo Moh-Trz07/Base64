@@ -1,4 +1,4 @@
-package main
+/*package main
 
 import (
 	"bufio"
@@ -86,4 +86,40 @@ func main() {
 
 	fmt.Print("\n===[{ FINAL RESULT }]===\n\n")
 	fmt.Printf("%q ===> %s\n", w, Result)  
+}*/
+
+package main
+
+import (
+	"fmt"
+	"os"
+	"bufio"
+	"strings"
+)
+
+func main(){
+	fmt.Print("Give a Base64 string : ")
+	reader := bufio.NewReader(os.Stdin)
+	w, _ := reader.ReadString('\n')
+	w = strings.TrimRight(w, "\r\n")
+
+	base64Chars := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+	paddingCount := strings.Count(w, "=")
+
+	// STEP 1
+    fmt.Printf("Input: %q\n", w)
+	fmt.Printf("Padding: %d\n\n", paddingCount)
+	var SixBitVal []uint32
+
+	for _, ch := range w {
+		if ch == '='{ continue }
+		idx := strings.IndexRune(base64Chars, ch)
+		if idx == -1 {
+			fmt.Printf("Invaled char: %c\n", ch)
+			return
+		}
+		SixBitVal = append(SixBitVal, uint32(idx))
+		fmt.Printf("'%c' -> %d -> %06b\n", ch, idx, idx)
+	}
+	fmt.Printf("\nALL 6-bit values: %v\n", SixBitVal)
 }
