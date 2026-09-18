@@ -10,8 +10,8 @@ import (
 func main() {
 	fmt.Print("Give a word: ")
 	reader := bufio.NewReader(os.Stdin)
-	w, _ := reader.ReadString('\n')       // Read until Enter
-	w = strings.TrimRight(w, "\r\n")       // Remove trailing newline
+	w, _ := reader.ReadString('\n') // Read until Enter
+	w = strings.TrimRight(w, "\r\n") // Remove trailing newline
 
 	var Result string
 	base64Chars := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
