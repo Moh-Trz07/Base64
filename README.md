@@ -118,17 +118,35 @@ base64.StdEncoding.DecodeString("c2FsYW1vbGk=")
 ```
 ## What You'll Learn
 
-- Bit shifting (`<<`, `>>`) and masking (`&`) in Go
-- Combining bytes into a 32-bit integer
+- Bit shifting (<<, >>) and masking (&) in Go
+- Combining bytes into a 32-bit integer (and splitting it back apart)
+- Reverse lookup tables for decoding
 - Why Base64 inflates data by ~33%
-- Why padding exists
-
+- Why padding exists and how to strip it
+  
 ## Status
 
-- [x] Encoder (steps 1–5)
-- [ ] Decoder
+- [x] Encoder
+- [x] Decoder
+- [x] Menu (encode / decode / exit)
 - [ ] Unit tests
+- [ ] Command-line flags (-e, -d)
+
 
 ## License
 
 MIT
+
+
+## 🔑 Key Changes
+
+| Section | Change |
+|---------|--------|
+| Top description | Now says **encoder + decoder**, not just encoder |
+| Warning | Shows both `EncodeToString` and `DecodeString` |
+| "Why?" | Now says "in both directions" |
+| How to Run | Added the menu preview |
+| Examples | Split into **Encoding** and **Decoding** sections |
+| Verification | Shows both encode and decode checks |
+| What You'll Learn | Added decoding-specific items |
+| Status | ✅ Encoder, ✅ Decoder, ✅ Menu, ⬜ Tests, ⬜ CLI flags |
