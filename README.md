@@ -136,17 +136,3 @@ base64.StdEncoding.DecodeString("c2FsYW1vbGk=")
 ## License
 
 MIT
-
-
-## 🔑 Key Changes
-
-| Section | Change |
-|---------|--------|
-| Top description | Now says **encoder + decoder**, not just encoder |
-| Warning | Shows both `EncodeToString` and `DecodeString` |
-| "Why?" | Now says "in both directions" |
-| How to Run | Added the menu preview |
-| Examples | Split into **Encoding** and **Decoding** sections |
-| Verification | Shows both encode and decode checks |
-| What You'll Learn | Added decoding-specific items |
-| Status | ✅ Encoder, ✅ Decoder, ✅ Menu, ⬜ Tests, ⬜ CLI flags |
