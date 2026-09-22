@@ -121,5 +121,28 @@ func main(){
 		SixBitVal = append(SixBitVal, uint32(idx))
 		fmt.Printf("'%c' -> %d -> %06b\n", ch, idx, idx)
 	}
-	fmt.Printf("\nALL 6-bit values: %v\n", SixBitVal)
+	
+	// STEP 2
+	var bytesRes []byte
+	for i := 0; i < len(SixBitVal); i +=4{
+		v1 := SixBitVal[i]
+		var v2,v3,v4 uint32 = 0,0,0
+		if i+1 < len(SixBitVal){ v2 = SixBitVal[i+1] }
+		if i+2 < len(SixBitVal){ v3 = SixBitVal[i+2] }
+		if i+3 < len(SixBitVal){ v4 = SixBitVal[i+3] }
+
+		comb := (v1 << 18) | (v2 << 12) | (v3 << 6) | v4
+		fmt.Printf("\nGroup %d: %d %d %d %d\n", i/4+1, v1, v2, v3, v4)
+		fmt.Printf("Combined 24-bit: %024b\n", comb)
+
+		b1 := byte((comb >> 16) & 0xFF) // 23-16 bits
+		b2 := byte((comb >> 8) & 0xFF) // 15-8 bits
+		b3 := byte(comb  & 0xFF)  // 7-0 bits
+
+		fmt.Printf(" Bytes: %08b %08b %08b → %d %d %d\n\n", b1, b2, b3, b1, b2, b3)
+		bytesRes = append(bytesRes, b1, b2, b3)
+	}
+
+	fmt.Printf("Raw bytes: %v\n", bytesRes)
+	fmt.Printf("As string: %q\n", string(bytesRes))
 }
