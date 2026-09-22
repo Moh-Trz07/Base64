@@ -132,9 +132,7 @@ func decode(reader *bufio.Reader) {
 	var SixBitVal []uint32
 
 	for _, ch := range w {
-		if ch == '=' {
-			continue
-		}
+		if ch == '=' {continue}
 		idx := strings.IndexRune(base64Chars, ch)
 		if idx == -1 {
 			fmt.Printf("Invalid char: %c\n", ch)
@@ -165,7 +163,7 @@ func decode(reader *bufio.Reader) {
 		bytesRes = append(bytesRes, b1, b2, b3)
 	}
 
-	// STEP 3
+	// STEP 3 (if theres any padding)
 	if paddingCount == 0 { fmt.Println("No padding found") } else {
 		fmt.Printf("Padding count: %d\n", paddingCount)
 		fmt.Printf("Bytes before removal: %v (%d bytes)\n", bytesRes, len(bytesRes))
