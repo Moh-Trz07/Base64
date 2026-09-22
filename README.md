@@ -72,9 +72,50 @@ Verified against Go's standard library:
 
 ```go
 base64.StdEncoding.EncodeToString([]byte("salamoli"))
-// → "c2FsYW1vbGk="  ✅
+// → "c2FsYW1vbGk=" ✅
 ```
+## Decoding
+```
+Give a Base64 string: c2FsYW1vbGk=
 
+'c' -> 28 -> 011100
+'2' -> 54 -> 110110
+'F' -> 5  -> 000101
+'s' -> 44 -> 101100
+'Y' -> 24 -> 011000
+'W' -> 22 -> 010110
+'1' -> 53 -> 110101
+'v' -> 47 -> 101111
+'b' -> 27 -> 011011
+'G' -> 6  -> 000110
+'k' -> 36 -> 100100
+
+Group 1: 28 54 5 44
+Combined 24-bit: 011100110110000101101100
+ Bytes: 01110011 01100001 01101100 → 115 97 108
+
+Group 2: 24 22 53 47
+Combined 24-bit: 011000010110110101101111
+ Bytes: 01100001 01101101 01101111 → 97 109 111
+
+Group 3: 27 6 36 0
+Combined 24-bit: 011011000110100100000000
+ Bytes: 01101100 01101001 00000000 → 108 105 0
+
+Padding count: 1
+Bytes before removal: [115 97 108 97 109 111 108 105 0] (9 bytes)
+Bytes after removal:  [115 97 108 97 109 111 108 105] (8 bytes)
+
+===[{ FINAL RESULT }]===
+
+c2FsYW1vbGk= ===> salamoli
+```
+Verified against Go's standard library:
+
+```go
+base64.StdEncoding.DecodeString("c2FsYW1vbGk=")
+// → "salamoli" ✅
+```
 ## What You'll Learn
 
 - Bit shifting (`<<`, `>>`) and masking (`&`) in Go
