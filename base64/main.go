@@ -107,8 +107,6 @@ func main(){
 	paddingCount := strings.Count(w, "=")
 
 	// STEP 1
-    fmt.Printf("Input: %q\n", w)
-	fmt.Printf("Padding: %d\n\n", paddingCount)
 	var SixBitVal []uint32
 
 	for _, ch := range w {
@@ -142,7 +140,20 @@ func main(){
 		fmt.Printf(" Bytes: %08b %08b %08b → %d %d %d\n\n", b1, b2, b3, b1, b2, b3)
 		bytesRes = append(bytesRes, b1, b2, b3)
 	}
+    
+	// STEP 3
+	if paddingCount == 0 { fmt.Println("No padding found") } else {
+		
+    fmt.Printf("Padding count: %d\n", paddingCount)
+	fmt.Printf("Bytes before removal: %v (%d bytes)\n", bytesRes, len(bytesRes))
 
-	fmt.Printf("Raw bytes: %v\n", bytesRes)
-	fmt.Printf("As string: %q\n", string(bytesRes))
+	if paddingCount > 0 && paddingCount <= len(bytesRes) {
+		bytesRes = bytesRes[:len(bytesRes)-paddingCount]
+	}
+	fmt.Printf("Bytes after removal:  %v (%d bytes)\n\n", bytesRes, len(bytesRes))
+}
+
+	
+    fmt.Print("===[{ FINAL RESULT }]===\n\n")
+	fmt.Printf("%s ===> %s\n", w, string(bytesRes))
 }
