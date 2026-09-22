@@ -30,7 +30,8 @@ You'll see a menu:
 Choose an option:
 ```
 
-## Example
+# Examples
+## Encoding
 
 ```
 Give a word: salamoli
@@ -64,7 +65,7 @@ Base64 chars: b G k A
 
 ===[{ FINAL RESULT }]===
 
-"salamoli" ===> c2FsYW1vbGk=
+salamoli ===> c2FsYW1vbGk=
 ```
 
 Verified against Go's standard library:
