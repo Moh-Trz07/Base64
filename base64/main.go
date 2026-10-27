@@ -9,13 +9,9 @@ import (
 
 func main() {
 	r := bufio.NewReader(os.Stdin)
-
-	// ============================================
-	// MENU
-	// ============================================
-	fmt.Println("==============================")
-	fmt.Println("      BASE64 TOOL (Go)        ")
-	fmt.Println("==============================")
+	
+	// Menu
+	fmt.Println("|=====>{BASE64 TOOL (Go)}<=====|")
 	fmt.Println("1. Encode")
 	fmt.Println("2. Decode")
 	fmt.Println("3. Exit")
@@ -36,14 +32,11 @@ func main() {
 	}
 }
 
-// ============================================
-// ENCODER
-// ============================================
+// Encoder
 func encode(reader *bufio.Reader) {
 	fmt.Print("\nGive a word: ")
 	w, _ := reader.ReadString('\n')
 	w = strings.TrimRight(w, "\r\n")
-
 	if len(w) == 0 {
 		fmt.Println("No input given!")
 		return
@@ -117,9 +110,7 @@ func encode(reader *bufio.Reader) {
 	fmt.Printf("%s ===> %s\n", w, Res)
 }
 
-// ============================================
-// DECODER
-// ============================================
+// Decoder
 func decode(reader *bufio.Reader) {
 	fmt.Print("\nGive a Base64 string: ")
 	w, _ := reader.ReadString('\n')
